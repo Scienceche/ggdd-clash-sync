@@ -19,6 +19,12 @@ matching China-egress behavior exactly). GGDD's own client bundles a custom core
 - Deployment on this machine: `D:\Clash_Verge\verge-mihomo-real.exe` (their core) +
   `verge-mihomo.exe` (C# wrapper, source `core-wrapper.cs` in the same dir) +
   `verge-mihomo.exe.orig` (pristine stock core backup).
+- The wrapper source was originally missing from this repo; it was rewritten from the
+  behavior spec above on 2026-10-12 and now lives at `scripts/core-wrapper.cs`
+  (verified working on a second machine). Deployment there:
+  `D:\Clash Verge\` (note the space in the dir name) with the same three-file layout.
+  The patched core can be copied straight from an installed official client at
+  `D:\GGDD\resources\sidecar\mihomo.exe` — no need to unpack the NSIS installer.
 
 ### Wrapper necessity
 

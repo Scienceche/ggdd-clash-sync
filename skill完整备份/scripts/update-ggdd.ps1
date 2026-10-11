@@ -13,6 +13,13 @@ param(
 $ErrorActionPreference = "Stop"
 [Console]::OutputEncoding = [Text.Encoding]::UTF8
 
+# --- 0a. locate the Clash Verge exe if the default path misses (per-machine install dirs) ---
+if (-not (Test-Path $VergeExe)) {
+  foreach ($cand in @("D:\Clash Verge\clash-verge.exe", "$env:LOCALAPPDATA\Programs\Clash Verge\clash-verge.exe")) {
+    if (Test-Path $cand) { $VergeExe = $cand; break }
+  }
+}
+
 # --- 0. patched-core sanity check (GGDD nodes REQUIRE their custom core) ---
 $vergeDir = Split-Path $VergeExe -Parent
 if (-not (Test-Path (Join-Path $vergeDir "verge-mihomo-real.exe"))) {

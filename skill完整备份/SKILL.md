@@ -23,16 +23,22 @@ Clash Verge Rev (D:\Clash_Verge\clash-verge.exe)
 ```
 
 - `verge-mihomo.exe.orig` = pristine stock core (61MB) — restore it to go back to vanilla.
-- `core-wrapper.cs` = wrapper source; recompile with
+- `core-wrapper.cs` = wrapper source (canonical copy in this skill at `scripts/core-wrapper.cs`,
+  deployed copies live next to the cores in the Clash Verge dir); recompile with
   `C:\Windows\Microsoft.NET\Framework64\v4.0.30319\csc.exe /nologo /out:verge-mihomo.exe core-wrapper.cs`
+  (paths with spaces need quotes)
 - Profile: `%APPDATA%\io.github.clash-verge-rev.clash-verge-rev\profiles\ggddSub2026.yaml`
   (29 trojan nodes, header comment carries the sub-token).
 
 ## Normal case: refresh the node list
 
 ```powershell
-C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -NoProfile -ExecutionPolicy Bypass -File "C:\Users\Admin\.agents\skills\ggdd-clash-sync\scripts\update-ggdd.ps1"
+C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -NoProfile -ExecutionPolicy Bypass -File "$env:USERPROFILE\.agents\skills\ggdd-clash-sync\scripts\update-ggdd.ps1"
 ```
+
+Per-machine tweaks when deploying: pass `-VergeExe` if the Clash Verge install path
+differs from the default in the script's param block (e.g. `D:\Clash Verge\clash-verge.exe`
+on a machine where the dir has a space).
 
 Fetches + decrypts the subscription (tk token, no login needed), regenerates the profile,
 restarts Clash Verge, verifies `HTTP 204` through 127.0.0.1:7897.
